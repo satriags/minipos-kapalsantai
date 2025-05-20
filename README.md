@@ -83,9 +83,10 @@ DATABASE_URL="mysql://username:password@localhost:3306/nama_database"
 JWT_SECRET="your_secret_key"
 PORT=3000
 ```
-
+## Arsitektur Table Mini POS
+![Logo](
+https://raw.githubusercontent.com/satriags/minipos-kapalsantai/refs/heads/main/relasi_db.png)
 ---
-
 ## 🧑‍💻 Developer
 
 * 👨‍💻 Satria Giri Syawalludin
