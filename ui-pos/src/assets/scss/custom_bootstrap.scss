@@ -1,0 +1,19 @@
+// custom.scss
+
+// Import Bootstrap functions
+// @import "node_modules/bootstrap/scss/functions";
+@import '/node_modules/bootstrap/scss/_functions';
+// Override Bootstrap theme colors
+$primary: #ffc107; // Warna utama
+$secondary: #6c757d; // Warna abu-abu biru
+$danger: #dc3545; // Warna merah
+$success: #198754; // Warna hijau
+$info: #0dcaf0; // Warna biru muda
+$warning: #0266b4; // Warna oranye
+$light: #f7f7f7; // Warna terang
+$dark: #212529; // Warna gelap
+$background: #f8f9fa; // Latar belakang terang
+$muted: #adb5bd; // Warna abu-abu pucat
+// $border-width:10px;
+// Import Bootstrap to apply your customizations
+@import '/node_modules/bootstrap/scss/bootstrap';

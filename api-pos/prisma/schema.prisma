@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int       @id @default(autoincrement())
+  name            String    @db.VarChar(255)
+  username        String    @db.VarChar(255)
+  email           String    @db.VarChar(255)
+  sub             String?   @db.VarChar(255)
+  locale          String?   @db.VarChar(255)
+  givenName       String?   @db.VarChar(255)
+  familyName      String?   @db.VarChar(255)
+  phone           String?   @db.VarChar(255)
+  photo           String?   @db.VarChar(255)
+  emailVerified   String?   @db.VarChar(255)
+  googleId        String?   @db.VarChar(255)
+  role            String?   @db.VarChar(255)
+  createdAt       DateTime  @default(now()) @db.DateTime()
+  createdBy       Int?      @db.Int
+  updatedAt       DateTime? @updatedAt @db.DateTime()
+  updatedBy       Int?      @db.Int
+  deletedAt       DateTime? @db.DateTime()
+  deletedBy       Int?      @db.Int
+  // Relasi ke Product
+  productsCreated Product[] @relation("CreatedProducts")
+  Order           Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  price     Int       @db.Int
+  stock     Int       @db.Int
+  desc      String    @db.Text
+  createdAt DateTime  @default(now()) @db.DateTime()
+  createdBy Int       @db.Int
+  updatedAt DateTime? @updatedAt @db.DateTime()
+  updatedBy Int?      @db.Int
+  deletedAt DateTime? @db.DateTime()
+  deletedBy Int?      @db.Int
+
+  // Foreign key relasi
+  creator   User        @relation("CreatedProducts", fields: [createdBy], references: [id])
+  OrderItem OrderItem[]
+
+  @@map("products")
+}
+
+model Order {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @db.Int
+  invoice     String    @db.VarChar(255)
+  totalBayar  Int       @db.Int
+  createdAt   DateTime  @default(now()) @db.DateTime()
+  createdBy   Int       @db.Int
+  updatedAt   DateTime? @updatedAt @db.DateTime()
+  updatedBy   Int?      @db.Int
+  deletedAt   DateTime? @db.DateTime()
+  deletedBy   Int?      @db.Int
+
+  // Foreign key relasi
+  user      User        @relation(fields: [userId], references: [id])
+  OrderItem OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          Int       @id @default(autoincrement())
+  orderId     Int       @db.Int
+  productId   Int       @db.Int
+  nameProduct String    @db.VarChar(255)
+  descProduct String    @db.Text
+  price       Int       @db.Int
+  stockMax    Int       @db.Int
+  totalQty    Int       @db.Int
+  createdAt   DateTime  @default(now()) @db.DateTime()
+  createdBy   Int       @db.Int
+  updatedAt   DateTime? @updatedAt @db.DateTime()
+  updatedBy   Int?      @db.Int
+  deletedAt   DateTime? @db.DateTime()
+  deletedBy   Int?      @db.Int
+  // Foreign key relasi
+  order       Order     @relation(fields: [orderId], references: [id])
+  product     Product   @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}

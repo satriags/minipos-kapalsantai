@@ -1,0 +1,44 @@
+/*
+  Warnings:
+
+  - You are about to alter the column `createdAt` on the `order_items` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `updatedAt` on the `order_items` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `deletedAt` on the `order_items` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to drop the column `productId` on the `orders` table. All the data in the column will be lost.
+  - You are about to alter the column `createdAt` on the `orders` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `updatedAt` on the `orders` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `deletedAt` on the `orders` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `createdAt` on the `products` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `updatedAt` on the `products` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `deletedAt` on the `products` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `createdAt` on the `users` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `updatedAt` on the `users` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `deletedAt` on the `users` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+
+*/
+-- DropForeignKey
+ALTER TABLE `orders` DROP FOREIGN KEY `orders_productId_fkey`;
+
+-- DropIndex
+DROP INDEX `orders_productId_fkey` ON `orders`;
+
+-- AlterTable
+ALTER TABLE `order_items` MODIFY `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `updatedAt` DATETIME NULL,
+    MODIFY `deletedAt` DATETIME NULL;
+
+-- AlterTable
+ALTER TABLE `orders` DROP COLUMN `productId`,
+    MODIFY `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `updatedAt` DATETIME NULL,
+    MODIFY `deletedAt` DATETIME NULL;
+
+-- AlterTable
+ALTER TABLE `products` MODIFY `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `updatedAt` DATETIME NULL,
+    MODIFY `deletedAt` DATETIME NULL;
+
+-- AlterTable
+ALTER TABLE `users` MODIFY `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `updatedAt` DATETIME NULL,
+    MODIFY `deletedAt` DATETIME NULL;
