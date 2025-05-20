@@ -86,20 +86,6 @@ PORT=3000
 
 ---
 
-## 📦 Tools Tambahan (Opsional)
-
-| Tool          | Kegunaan                        |
-| ------------- | ------------------------------- |
-| Postman       | Testing endpoint API            |
-| MySQL Client  | GUI untuk cek data di database  |
-| Prisma Studio | Cek & edit data dari Prisma ORM |
-
-```bash
-npx prisma studio
-```
-
----
-
 ## 🧑‍💻 Developer
 
 * 👨‍💻 Satria Giri Syawalludin
